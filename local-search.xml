@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title></title>
+    <link href="/2022/03/05/CS61c-Spring2022-Project1/"/>
+    <url>/2022/03/05/CS61c-Spring2022-Project1/</url>
+    
+    <content type="html"><![CDATA[<hr><p>title: CS61c Spring2022 Project1<br>date: 2022-03-05 09:18:47<br>tags:</p><ul><li>原创<br>categories: </li><li>CS61C</li></ul><h1 id="CS61C-Spring2022-Project1-Instruction"><a href="#CS61C-Spring2022-Project1-Instruction" class="headerlink" title="CS61C Spring2022 Project1 Instruction"></a>CS61C Spring2022 Project1 Instruction</h1><p>1.注意如何为二维pointer to  pointer to char数组board分配malloc的空间</p><p>2.task1给的row 和 column 是从0开始的，不需要再-1</p><p>3.task2 注意二维数组，每个元素都是一维数组，要分别free每个元素</p><p>4.segmentation fault的原因</p><ul><li>数组越界</li><li>访问不存在的内存空间(未分配)</li></ul><p>5.这里比较坑的一点是</p><p>row  是相当于y坐标，column相当于横坐标，对于board$[ ][ ] $ 二维数组,访问写成board$[y][x]$ 而不是board$ [x][y]$ </p><p>6.如果蛇死了，立即将头替换为’x’即可</p><p>task 5</p><p>文件输入流，太难了，文件没学好，实际上就是让你从文件中将 长方形board二维数组 读入</p><p>game-&gt;board，并设置好x_size和y_size，然后返回*game</p><p>这一步我使用的是 fgets() ,由于你不知道文件里面的长方形矩阵有多少个字符，也不知道board数组有多少行，无法用malloc精确开辟空间，但是这里fgets又需要你传入特定大小作为参数，况且如果不事先开辟board的空间如何使用board $[i][j] $ ? 因此此处使用一个固定大小的缓存buffer数组，和向fgets()传入一个固定大小参数</p><figure class="highlight axapta"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-built_in">char</span> *fgets(<span class="hljs-built_in">char</span> *<span class="hljs-built_in">str</span>, <span class="hljs-built_in">int</span> n, FILE *stream)<br></code></pre></td></tr></table></figure><h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><ul><li><strong>str</strong> – 这是指向一个字符数组的指针，该数组存储了要读取的字符串。</li><li><strong>n</strong> – 这是要读取的最大字符数（包括最后的空字符）。通常是使用以 str 传递的数组长度。</li><li><strong>stream</strong> – 这是指向 FILE 对象的指针，该 FILE 对象标识了要从中读取字符的流。</li></ul><p>同时可打印buffer数组核对是否读入成功</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,buffer);<br></code></pre></td></tr></table></figure><p>task 7 关于函数指针 pointer to function 的传参</p><p>参见 <a href="https://www.geeksforgeeks.org/function-pointer-in-c/">https://www.geeksforgeeks.org/function-pointer-in-c/</a></p><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">update_state(<span class="hljs-keyword">state</span>, &amp;deterministic_food);<br></code></pre></td></tr></table></figure><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pf">void update_state(game_state_t *<span class="hljs-keyword">state</span>, int (*add_food)(game_state_t *<span class="hljs-keyword">state</span>))<br></code></pre></td></tr></table></figure><p> 成功完成所有本地测试:</p><img src="/2022/03/05/CS61c-Spring2022-Project1/image-61c-proj1.png" class="">]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>测试文章</title>
     <link href="/2022/02/27/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2022/02/27/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>
