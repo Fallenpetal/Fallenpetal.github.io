@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>CS61c Spring2022 Project2</title>
+    <link href="/2022/03/21/CS61c-Spring2022-Project2/"/>
+    <url>/2022/03/21/CS61c-Spring2022-Project2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="CS61C-Spring2022-Project2-Guide"><a href="#CS61C-Spring2022-Project2-Guide" class="headerlink" title="CS61C Spring2022 Project2 Guide"></a>CS61C Spring2022 Project2 Guide</h1><h3 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h3><p>最容易错的一点是:</p><p>在 C 语言中，如果 *p 是 int 类型的指针，指向一个 int Array</p><p>执行</p><figure class="highlight c"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs c">p = p + <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure><p>的操作，实际上会让地址从 0x00  变成  0x04，相当于从 A[0] 跳到 A[1] , 也就是C 自动帮你处理了对于type 的偏移量</p><p>但是在 RISC-V 中，当 p 指向 0x00 时，执行 p + 1 只会得到 0x01, 并不是int 数组的下一位元素，需要手动乘以4以访问下一位元素</p><h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3><p>venus 使用：</p><p>设置ebreak 断点之后，点击 run 才能到达断点处，可以在调试过程中重复点击 run </p><p>点击 step 会跳转到下一步，如果call function 则会单步进入到 function，而不能跳过 function</p><h3 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h3><p>在task 6的时候，写的测试需要把</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">raise</span> NotImplementedError(<span class="hljs-string">&quot;TODO&quot;</span>)<br></code></pre></td></tr></table></figure><p>注释掉才能跑，然后最后一个测试malloc返回失败，a0 &#x3D; 26，</p><p>测试malloc返回失败的例子:</p><p>传入数组长度为 0x7FFFFFFF (32bit 有符号数最大值)</p><h3 id="4-task7"><a href="#4-task7" class="headerlink" title="4.task7"></a>4.task7</h3><p>以下几个坑点:</p><p>1.fopen 返回的file discriptor 放在a0中，需要将其存入栈中，因为接下来的fread, fclose都需要 file discriptor作为参数传入，每次使用时需将file discriptor从栈中取出传入a0 ，每次a0都会被覆盖，所以需要备份</p><p>2.fread 的使用</p><p>需要注意的是 连续调用fread ，是相当于接着上次读文件的地方继续读的，例如第一次调用</p><p>fread ，读了4byte 读出 row ，那么接着再使用 fread ，同样传入 4 byte 即可</p><p>如果传入的参数非file discriptor ， 返回值是0xFFFFFFFF，例如先把文件close之后再使用fread就会出现这种情况</p><p>3.查看一个二进制文件.bin  使用命令:</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">xxd</span> -e filename.bin<br></code></pre></td></tr></table></figure><p>替换掉filename.bin即可</p><h3 id="5-task8"><a href="#5-task8" class="headerlink" title="5.task8"></a>5.task8</h3><p>需要注意给write_matrix的参数a1是一个数据的地址，例如数组:</p><p>[1, 2, 3, 4, 5, 6, 7, 8, 9]</p><p>的地址，题目要求先写入行和列，因此需要另外malloc一个buffer 存入 row 和 column，将row 和 column写入文件后，再将数组中的所有元素写入</p><h3 id="6-评测截图"><a href="#6-评测截图" class="headerlink" title="6. 评测截图"></a>6. 评测截图</h3><p>fail的那一项是calling convention检查，不知道哪里有问题</p><p>最后想说的是，这个项目是汇编写的数字识别，可惜最后应用的时候缺少提示给的文件夹</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CS61C</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>原创</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CS61c Spring2022 Project1</title>
     <link href="/2022/03/05/CS61c-Spring2022-Project1/"/>
     <url>/2022/03/05/CS61c-Spring2022-Project1/</url>
